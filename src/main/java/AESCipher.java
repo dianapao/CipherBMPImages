@@ -13,7 +13,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class AESCipher {
-    public static byte[] encrypt(byte[] plainText, String encryptionKey, String iv) throws Exception {
+    public static byte[] encryptCBC(byte[] plainText, String encryptionKey, String iv) throws Exception {
         //String llave = "holaestaeslallav";
         //String iv = "1234567891123456";
         byte [] ibB = iv.getBytes("UTF-8");
@@ -24,14 +24,18 @@ public class AESCipher {
         return cipher.doFinal(plainText);
     }
     
-    /*public static byte[] decrypt(byte[] plainText, String encryptionKey, String iv) throws Exception {
+    public static byte[] decryptCBC(byte[] plainText, String encryptionKey, String iv) throws Exception {
         byte [] ibB = iv.getBytes("UTF-8");
         
         Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding", "SunJCE");
         SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
         cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv.getBytes("UTF-8")));
-        return cipher.doFinal(plainText);
-    }*/
+        
+        //cipher.doFinal(plainText);
+        //byte[] bytesDecrypt = cipher.doFinal(Base64.getDecoder().decode(plainText));
+        byte[] bytesDecrypt = cipher.doFinal(plainText);
+        return bytesDecrypt;
+    }
     
     private SecretKeySpec crearClave(String clave) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         byte[] claveEncriptacion = clave.getBytes("UTF-8");
@@ -60,14 +64,15 @@ public class AESCipher {
     
     /*public byte[] decryptECB(byte[] plainText, String originalSecretPass) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
         SecretKeySpec secretKey = this.crearClave(originalSecretPass);
-
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+        
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         
-        //byte[] bytesEncryped = Base64.getDecoder().decode(dataEncrypted.trim());
+        //byte[] bytesEncryped = Base64.getDecoder().decode(plainText);
         byte[] dataDecrypted = cipher.doFinal(plainText);
         
         return dataDecrypted;
     }*/
+    
     
 }

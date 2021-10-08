@@ -293,12 +293,12 @@ public class NewJFrame extends javax.swing.JFrame {
             System.out.println("Mod CBC");
             try {
                 if(optionCD == 0){
-                    bytesAfterCipherMode = AESAlgorithm.encrypt(plainTextByte, claveEncriptation, vi);
+                    bytesAfterCipherMode = AESAlgorithm.encryptCBC(plainTextByte, claveEncriptation, vi);
                     createImageAfterModeCipher(bytesAfterCipherMode, "_eCBC");
                     System.out.println("Imagen cifrada con CBC");
                 }else{
-                    //bytesAfterCipherMode = AESAlgorithm.decrypt(plainTextByte, claveEncriptation, vi);
-                    //createImageAfterModeCipher(bytesAfterCipherMode, "_dCBC");
+                    bytesAfterCipherMode = AESAlgorithm.decryptCBC(plainTextByte, claveEncriptation, vi);
+                    createImageAfterModeCipher(bytesAfterCipherMode, "_dCBC");
                     System.out.println("Imagen descifrada con CBC");
                 }
                 
@@ -307,6 +307,20 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }else if(optionMode == 2){
             System.out.println("Mod CFB");
+            try {
+                if(optionCD == 0){
+                    //bytesAfterCipherMode = AESAlgorithm.encryptCFB(plainTextByte, claveEncriptation, vi);
+                    //createImageAfterModeCipher(bytesAfterCipherMode, "_eCFB");
+                    System.out.println("Imagen cifrada con CFB");
+                }else{
+                    //bytesAfterCipherMode = AESAlgorithm.decryptCFB(plainTextByte, claveEncriptation, vi);
+                    //createImageAfterModeCipher(bytesAfterCipherMode, "_dCFB");
+                    System.out.println("Imagen descifrada con CFB");
+                }
+                
+            } catch (Exception ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if(optionMode == 3){
             System.out.println("Mod OFB");
         }
