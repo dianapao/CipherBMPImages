@@ -309,12 +309,12 @@ public class NewJFrame extends javax.swing.JFrame {
             System.out.println("Mod CFB");
             try {
                 if(optionCD == 0){
-                    //bytesAfterCipherMode = AESAlgorithm.encryptCFB(plainTextByte, claveEncriptation, vi);
-                    //createImageAfterModeCipher(bytesAfterCipherMode, "_eCFB");
+                    bytesAfterCipherMode = AESAlgorithm.encryptCFB(plainTextByte, claveEncriptation, vi);
+                    createImageAfterModeCipher(bytesAfterCipherMode, "_eCFB");
                     System.out.println("Imagen cifrada con CFB");
                 }else{
-                    //bytesAfterCipherMode = AESAlgorithm.decryptCFB(plainTextByte, claveEncriptation, vi);
-                    //createImageAfterModeCipher(bytesAfterCipherMode, "_dCFB");
+                    bytesAfterCipherMode = AESAlgorithm.decryptCFB(plainTextByte, claveEncriptation, vi);
+                    createImageAfterModeCipher(bytesAfterCipherMode, "_dCFB");
                     System.out.println("Imagen descifrada con CFB");
                 }
                 
@@ -323,6 +323,20 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         }else if(optionMode == 3){
             System.out.println("Mod OFB");
+            try {
+                if(optionCD == 0){
+                    bytesAfterCipherMode = AESAlgorithm.encryptCFB(plainTextByte, claveEncriptation, vi);
+                    createImageAfterModeCipher(bytesAfterCipherMode, "_eOFB");
+                    System.out.println("Imagen cifrada con OFB");
+                }else{
+                    bytesAfterCipherMode = AESAlgorithm.decryptCFB(plainTextByte, claveEncriptation, vi);
+                    createImageAfterModeCipher(bytesAfterCipherMode, "_dOFB");
+                    System.out.println("Imagen descifrada con OFB");
+                }
+                
+            } catch (Exception ex) {
+                Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButtonReadyActionPerformed
 

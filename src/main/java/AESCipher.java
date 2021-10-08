@@ -74,5 +74,51 @@ public class AESCipher {
         return dataDecrypted;
     }*/
     
+    public static byte[] encryptCFB(byte[] plainText, String encryptionKey, String iv) throws Exception {
+        //String llave = "holaestaeslallav";
+        //String iv = "1234567891123456";
+        byte [] ibB = iv.getBytes("UTF-8");
+        
+        Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding", "SunJCE");
+        SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
+        cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv.getBytes("UTF-8")));
+        return cipher.doFinal(plainText);
+    }
     
+    public static byte[] decryptCFB(byte[] plainText, String encryptionKey, String iv) throws Exception {
+        byte [] ibB = iv.getBytes("UTF-8");
+        
+        Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding", "SunJCE");
+        SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
+        cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv.getBytes("UTF-8")));
+        
+        //cipher.doFinal(plainText);
+        //byte[] bytesDecrypt = cipher.doFinal(Base64.getDecoder().decode(plainText));
+        byte[] bytesDecrypt = cipher.doFinal(plainText);
+        return bytesDecrypt;
+    }
+    
+    public static byte[] encryptOFB(byte[] plainText, String encryptionKey, String iv) throws Exception {
+        //String llave = "holaestaeslallav";
+        //String iv = "1234567891123456";
+        byte [] ibB = iv.getBytes("UTF-8");
+        
+        Cipher cipher = Cipher.getInstance("AES/OFB/NoPadding", "SunJCE");
+        SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
+        cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv.getBytes("UTF-8")));
+        return cipher.doFinal(plainText);
+    }
+    
+    public static byte[] decryptOFB(byte[] plainText, String encryptionKey, String iv) throws Exception {
+        byte [] ibB = iv.getBytes("UTF-8");
+        
+        Cipher cipher = Cipher.getInstance("AES/OFB/NoPadding", "SunJCE");
+        SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes("UTF-8"), "AES");
+        cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv.getBytes("UTF-8")));
+        
+        //cipher.doFinal(plainText);
+        //byte[] bytesDecrypt = cipher.doFinal(Base64.getDecoder().decode(plainText));
+        byte[] bytesDecrypt = cipher.doFinal(plainText);
+        return bytesDecrypt;
+    }
 }
