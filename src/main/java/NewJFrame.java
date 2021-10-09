@@ -296,8 +296,8 @@ public class NewJFrame extends javax.swing.JFrame {
                     createImageAfterModeCipher(bytesAfterCipherMode, "_eEBC");
                     System.out.println("Imagen cifrada con ECB");
                 }else{
-                    //bytesAfterCipherMode = AESAlgorithm.decryptECB(plainTextByte, claveEncriptation);
-                    //createImageAfterModeCipher(bytesAfterCipherMode, "_dEBC");
+                    bytesAfterCipherMode = AESAlgorithm.decryptECB(plainTextByte, claveEncriptation);
+                    createImageAfterModeCipher(bytesAfterCipherMode, "_dEBC");
                     System.out.println("Imagen descifrada con ECB");
                 }
                 
