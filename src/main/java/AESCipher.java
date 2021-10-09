@@ -51,28 +51,27 @@ public class AESCipher {
     }
     
     public byte[] encryptECB(byte[] plainText, String claveSecreta) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-        SecretKeySpec secretKey = this.crearClave(claveSecreta);
-        
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");        
+         byte[] encryptionKeyBytes = claveSecreta.getBytes();
+        Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+        SecretKey secretKey = new SecretKeySpec(claveSecreta.getBytes(), "AES");
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-
-        //byte[] dataEncrypt = datos.getBytes("UTF-8");
         byte[] bytesEncrypted = cipher.doFinal(plainText);
 
         return bytesEncrypted;
     }
     
-    /*public byte[] decryptECB(byte[] plainText, String originalSecretPass) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-        SecretKeySpec secretKey = this.crearClave(originalSecretPass);
-        
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+    public byte[] decryptECB(byte[] plainText, String originalSecretPass) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+         byte[] encryptionKeyBytes = originalSecretPass.getBytes();
+        Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+        System.out.println("1");
+        SecretKey secretKey = new SecretKeySpec(originalSecretPass.getBytes(), "AES");
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        
+        System.out.println("2");
         //byte[] bytesEncryped = Base64.getDecoder().decode(plainText);
-        byte[] dataDecrypted = cipher.doFinal(plainText);
         
-        return dataDecrypted;
-    }*/
+        System.out.println("4");
+        return cipher.doFinal(plainText);
+    }
     
     public static byte[] encryptCFB(byte[] plainText, String encryptionKey, String iv) throws Exception {
         //String llave = "holaestaeslallav";
